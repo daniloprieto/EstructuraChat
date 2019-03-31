@@ -1,6 +1,6 @@
 {
   "name": "estructurachat",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "estruuctura de chat hecha con node.js",
   "main": "index.js",
   "scripts": {
