@@ -1,0 +1,26 @@
+{
+  "name": "estructurachat",
+  "version": "0.0.1",
+  "description": "estruuctura de chat hecha con node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Orugamultimedial/EstructuraChat.git"
+  },
+  "keywords": [
+    "node.js"
+  ],
+  "author": "Danilo Prieto",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Orugamultimedial/EstructuraChat/issues"
+  },
+  "homepage": "https://github.com/Orugamultimedial/EstructuraChat#readme",
+  "dependecies": {
+    "body-parse": "^1.15.2",
+    "express": "^4.14.0"
+  }
+}
