@@ -8,7 +8,7 @@ module.exports = {
                  __dirname + path.json('/data/messages.json')
     data.current.push(newData)
     return new promise(function(resolver, reject){
-      fs.writeFile(dataPath, JSON.stringify(data), function(console.err){
+      fs.writeFile(dataPath, JSON.stringify(data), function(err){
         if(err) reject(err)
         resolve('OK')
       })

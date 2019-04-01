@@ -1,20 +1,67 @@
 var express = require('express')
+
+var Storage = require('../Storage')
+
 var Router = express.Router()
 
 Router.get('/users',function(req, res){
   //get Usuario
+  Storage.getData('/users')
+         .them(function(users){
+           res.json(users)
+         }).catch(function(error){
+           res.sendStatus(500).json(error)
+         })
 })
 
 Router.get('/messages',function(req, res){
   //get Messages
+  Storage.getData('/messages')
+         .them(function(messages){
+           res.json(messages)
+         }).catch(function(error){
+           res.sendStatus(500).json(error)
+         })
 })
 
 Router.post('/users',function(req, res){
   //post Usuario
+  var user = req.body.users
+  Storage.getData('users')
+         .then(function(users){
+           return new Promise(function(resolve, reject){
+             Storage.saveData('users', user, users)
+                    .then(function (message){
+                      resolve(message)
+                    }).catch(function(err){
+                      reject(err)
+                    })
+           })
+         }).then(function (message){
+           res.json(message)
+         }).catch(function (err){
+           res.sendStatus(500).json(err)
+         })
 })
 
 Router.post('/messages',function(req, res){
   //post Messages
+  var message = req.body.message
+  Storage.getData('messages')
+         .then(function(message){
+           return new Promise(function(resolve, reject){
+             Storage.saveData('users', message, message)
+                    .then(function (message){
+                      resolve(message)
+                    }).catch(function(err){
+                      reject(err)
+                    })
+           })
+         }).then(function (message){
+           res.json(message)
+         }).catch(function (err){
+           res.sendStatus(500).json(err)
+         })
 })
 
 module.exports = Router
@@ -24,7 +71,7 @@ module.exports = Router
     return Chat = {
       //todo el codigo
       apiUrl: '/chat',
-      $userDataModal: $('#modalCapture'),
+      $userDataModal: $('#modalCaptura'),
       $btnMessages: $('#btnMessage'),
       $messageText: $('#messageText'),
       userName: '',
@@ -55,7 +102,7 @@ module.exports = Router
       },
       getInitialUsers: function(){
         var self = this
-        var endpoint = self.apiUrl + 'users'
+        var endpoint = self.apiUrl + '/users'
         self.ajaxRequest(endpoint, 'GET', {})
             .done(function (data){
               var users = data.current
@@ -75,7 +122,7 @@ module.exports = Router
         var self = this
         var endpoint = self.apiUrl + '/users'
         var userObj = {user: user}
-        self.ajaxRequest()
+        self.ajaxRequest(endpoint, 'POST', userObj)
             .done(function(confirm){
               console.log(confirm)
             }).fail(function (error){
@@ -85,12 +132,12 @@ module.exports = Router
       renderUser: function(users){
         var self = this
         var userList = $('.users-list')
-        var userTemplate = '<li class="collecion-item avatar">' +
+        var userTemplate = '<li class="collection-item avatar">' +
                            '<img src="image/:image:" class="circle">' +
                            '<span class="title">:nombre:</span>' +
                            '<p><img src="image/online.png"/>En Linea </p>' +
                            '</li>'
-        users.map(function(users){
+        users.map(function(user){
           var newUser = userTemplate.replace(':image:', 'p2.jpg')
                                     .replace(':nombre:', user.nombre)
         })
