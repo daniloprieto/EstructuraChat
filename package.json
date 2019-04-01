@@ -20,7 +20,11 @@
   },
   "homepage": "https://github.com/Orugamultimedial/EstructuraChat#readme",
   "dependecies": {
-    "body-parse": "^1.15.2",
+    "body-parser": "^1.15.2",
     "express": "^4.14.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
   }
 }
